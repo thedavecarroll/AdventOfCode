@@ -1,5 +1,29 @@
 # --- Day 4: Passport Processing ---
 
+## PowerShell Learning
+
+For this puzzle, I chose to use `regex named groups`.
+Instead of combining all of the criteria into a single, very large string, I provided the criteria
+in a hashtable, with each passport field as the key and the criteria as the value.
+
+By using `regex named groups`, you can filter the matches based on the group name and success.
+
+```powershell
+$PassportMatch = [ordered]@{
+    PassportId = 'pid:(?<PassportId>\d{9}\b)'
+    CountryId = 'cid:(?<CountryId>\w+)'
+    IssueYear = 'iyr:(?<IssueYear>(201[0-9]|2020))'
+    ExpirationYear = 'eyr:(?<ExpirationYear>(202[0-9]|2030))'
+    BirthYear = 'byr:(?<BirthYear>(19[2-9][0-9]|200[0-2]))'
+    Height = 'hgt:((?<Height>(1[5-8][0-9]|19[0-3])cm|59|6[0-9]|7[0-6]in))'
+    HairColor = 'hcl:(?<HairColor>#[a-f\d]{6})'
+    EyeColor = 'ecl:(?<EyeColor>(amb|blu|brn|gry|grn|hzl|oth))'
+}
+```
+
+> Originally, I was matching on a wider `regex` for `Height`, but when I kept getting the wrong answer,
+> I forced myself to get the `regex` right for the two different criteria for *cm* and *in* measurements.
+
 ## --- Part One ---
 
 You arrive at the airport only to realize that you grabbed your North Pole Credentials instead of your passport. While these documents are extremely similar, North Pole Credentials aren't issued by a country and therefore aren't actually valid documentation for travel in most of the world.

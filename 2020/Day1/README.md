@@ -1,5 +1,10 @@
 # --- Day 1: Report Repair ---
 
+## PowerShell Learning
+
+For this puzzle, `for` loops each with a `label` is crucial.
+This allows you to break out of nested loops to an upper level loop.
+
 ## --- Part One ---
 
 After saving Christmas five years in a row, you've decided to take a vacation at a nice resort on a tropical island. Surely, Christmas will go on without you.

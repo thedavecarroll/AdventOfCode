@@ -14,7 +14,7 @@ $PassportMatch = [ordered]@{
     HairColor = 'hcl:(?<HairColor>#[a-f\d]{6})'
     EyeColor = 'ecl:(?<EyeColor>(amb|blu|brn|gry|grn|hzl|oth))'
 }
-$Fields = 'PassportId','CountryId','IssueYear','ExpirationYear','BirthYear','Height','HeightValue','HeightUnit','HairColor','EyeColor'
+#$Fields = 'PassportId','CountryId','IssueYear','ExpirationYear','BirthYear','Height','HeightValue','HeightUnit','HairColor','EyeColor'
 $InvalidPassport = 0
 $ValidPassport = 0
 $MissingCountryId = 0
@@ -22,7 +22,7 @@ $MissingCountryId = 0
 foreach ($Passport in $Passports) {
     $PassportFields = foreach ($PassportField in $Passport.Split('\s')) {
         foreach ($Key in $PassportMatch.Keys) {
-            [regex]::Matches($PassportField,$PassportMatch.$Key).Groups.Where{$_.Name -in $Fields -and $_.Success -eq $true}
+            [regex]::Matches($PassportField,$PassportMatch.$Key).Groups.Where{$_.Name -in $PassportMatch.Keys -and $_.Success -eq $true}
         }
     }
 

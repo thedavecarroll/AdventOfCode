@@ -1,5 +1,29 @@
 # --- Day 2: Password Philosophy ---
 
+## PowerShell Learning
+
+Using the `Split` operator, and its second parameter for maximum substrings, you can easily break up
+the input on non-word `(\W)` characters.
+
+```powershell
+'3-17 j: pmpjvtlxhlpcwphpjjb' -Split ('\W',4)
+```
+
+```text
+3
+17
+j
+ pmpjvtlxhlpcwphpjjb
+```
+
+This also allows you to assign all four variables at once.
+
+```powershell
+$Min,$Max,$Letter,$Password = $Entry -Split ('\W',4)
+```
+
+Then, it's an easy use of the .NET type accelerator, `[regex]`, to get all of the matches.
+
 ## --- Part One ---
 
 Your flight departs in a few days from the coastal airport; the easiest way down to the coast from here is via toboggan.

@@ -1,5 +1,53 @@
 # --- Day 3: Toboggan Trajectory ---
 
+## PowerShell Learning
+
+Since `Get-Content` automatically reads the file into an array of strings (each line),
+without the `-Raw` switch, you can easily iterate through each line in a `foreach`, `for`, `ForEach-Object` loop.
+
+To ensure that we have a wide enough "map", we first need to multiply the line.
+The type accelerator allows use to use a static method, [Math]::Ceiling, to get
+the highest number for the multiplier.
+
+Since the path is 3 right, 1 down, we can use the natural iteration for the `foreach` loop which is a step of 1.
+
+`Regex` again is your friend in this puzzle
+You can use the Index property from the `System.Text.RegularExpressions.Match` to quickly identify
+the location of all trees.
+
+```powershell
+$HorizontalLine = '...........##....#......#..#..#'
+$TreeLocation = [regex]::Matches($HorizontalLine,'#').Index
+```
+
+```text
+11
+12
+17
+24
+27
+30
+```
+
+For part 2, the loop had to be changed, as at least 1 path involved a different step value.
+
+Since we were given multiple paths down the slope, I chose to put those settings into a `[hashtable]`.
+I also included a value for trees encountered that I could increment directly and not have to deal with another variable.
+
+```powershell
+$SlopePaths = [ordered]@{
+    Path1 = [ordered]@{ Right = 1; Down = 1; Trees = 0}
+    Path2 = [ordered]@{ Right = 3; Down = 1; Trees = 0}
+    Path3 = [ordered]@{ Right = 5; Down = 1; Trees = 0}
+    Path4 = [ordered]@{ Right = 7; Down = 1; Trees = 0}
+    Path5 = [ordered]@{ Right = 1; Down = 2; Trees = 0}
+}
+```
+
+I used the Down value for each path as the step value, `for ($p=0;$p -lt $Map.Length;$p = $p + $SlopePaths[$SlopePath].Down)`.
+
+> I struggled with this initially. But when I came back to it the following day, I managed to solve it.
+
 ## --- Part One ---
 
 With the toboggan login problems resolved, you set off toward the airport. While travel by toboggan might be easy, it's certainly not safe: there's very minimal steering and the area is covered in trees. You'll need to see which angles will take you near the fewest trees.
