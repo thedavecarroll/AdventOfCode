@@ -5,3 +5,5 @@ This is the first year that I have participated in the [Advent of Code](https://
 Check out my [2020 solutions](2020/).
 
 Check out my [2021 solutions](2021/).
+
+Check out my [2022 solutions](2022/).
