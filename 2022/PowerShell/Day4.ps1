@@ -12,8 +12,7 @@ if ($UseSampleData.IsPresent) {
 }
 $AssignmentPairs = Get-DataSet @SampleData
 
-$Contained = 0
-[int]$ElfOneStart = $ElfOneEnd = $ElfTwoStart = $ElfTwoEnd = 0
+[int]$Contained = $ElfOneStart = $ElfOneEnd = $ElfTwoStart = $ElfTwoEnd = 0
 foreach ($Pair in $AssignmentPairs) {
     $ElfOne,$ElfTwo = $Pair.Split(',')
     $ElfOneStart,$ElfOneEnd,$ElfTwoStart,$ElfTwoEnd = $ElfOne.Split('-') + $ElfTwo.Split('-')
@@ -25,8 +24,7 @@ foreach ($Pair in $AssignmentPairs) {
 }
 'Assignment pairs contained in the other: {0}' -f $Contained
 
-[int]$ElfOneStart = $ElfOneEnd = $ElfTwoStart = $ElfTwoEnd = 0
-$Overlap = 0
+[int]$Overlap = $ElfOneStart = $ElfOneEnd = $ElfTwoStart = $ElfTwoEnd = 0
 foreach ($Pair in $AssignmentPairs) {
     $ElfOne,$ElfTwo = $Pair.Split(',')
     $ElfOneStart,$ElfOneEnd,$ElfTwoStart,$ElfTwoEnd = $ElfOne.Split('-') + $ElfTwo.Split('-')
