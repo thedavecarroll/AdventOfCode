@@ -39,3 +39,21 @@ foreach ($Pair in $AssignmentPairs) {
     }
 }
 'Assignment pairs with overlap: {0}' -f $Overlap
+
+function Find-Overlap {
+    param(
+        [long]$FirstStart,[long]$FirstEnd,
+        [long]$SecondStart,[long]$SecondEnd
+    )
+    [Math]::Max(0,[Math]::Min($FirstEnd,$SecondEnd) - [Math]::Max($FirstStart,$SecondStart) + 1)
+}
+
+[long]$Overlap = $ElfOneStart = $ElfOneEnd = $ElfTwoStart = $ElfTwoEnd = 0
+foreach ($Pair in $AssignmentPairs) {
+    $ElfOne,$ElfTwo = $Pair.Split(',')
+    $ElfOneStart,$ElfOneEnd,$ElfTwoStart,$ElfTwoEnd = $ElfOne.Split('-') + $ElfTwo.Split('-')
+    if (Find-Overlap $ElfOneStart $ElfOneEnd $ElfTwoStart $ElfTwoEnd) {
+        $Overlap++
+    }
+}
+'Using [Math]. Assignment pairs with overlap: {0}' -f $Overlap
